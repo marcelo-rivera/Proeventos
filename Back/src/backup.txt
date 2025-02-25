@@ -1,0 +1,190 @@
+{
+  "local": "São Paulo",
+  "dataEvento": "2024-09-19T20:24:55.278Z",
+  "tema": "Angular 11",
+  "qtdPessoas": 250,
+  "imagemURL": "foto2.png",
+  "telefone": "3281-9873",
+  "email": "marcelo@marcelo.com.br",
+  "lotes": null,
+  "redesSociais": null,
+  "palestrantesEventos": null
+}
+
+,
+  "redesSociais": [
+    {
+      "id": 0,
+      "nome": "string",
+      "url": "string",
+
+[
+  {
+    "id": 1,
+    "local": "San Pedro de Atacama",
+    "dataEvento": "2024-09-20T10:24:55.278",
+    "tema": "Angular 11.5",
+    "qtdPessoas": 2500,
+    "imagemURL": "foto25.png",
+    "telefone": "3281-9900",
+    "email": "rrivera@marcelo.com.br",
+    "lotes": [
+      {
+        "id": 1,
+        "nome": "1º lote",
+        "preco": 900,
+        "dataInicio": "2024-09-20T12:32:33.376",
+        "dataFim": "2024-09-20T12:32:33.376",
+        "quantidade": 150,
+        "eventoId": 1
+      },
+      {
+        "id": 2,
+        "nome": "2º lote",
+        "preco": 1100,
+        "dataInicio": "2024-09-22T12:32:33.376",
+        "dataFim": "2024-09-22T12:32:33.376",
+        "quantidade": 220,
+        "eventoId": 1
+      }
+    ],
+    "redesSociais": [],
+    "palestrantesEventos": []
+  },
+  {
+    "id": 2,
+    "local": "Santiago",
+    "dataEvento": "2024-09-20T12:24:55.278",
+    "tema": "Net Core Entity",
+    "qtdPessoas": 350,
+    "imagemURL": "foto3.png",
+    "telefone": "99292-9439",
+    "email": "rrivera@marcelo.com.br",
+    "lotes": [],
+    "redesSociais": [],
+    "palestrantesEventos": []
+  }
+]
+
+---------------------------------post--------------
+{
+    "local": "Puerto Varas",
+    "dataEvento": "2024-09-30T10:24:55.278",
+    "tema": "Net core 8.0.8",
+    "qtdPessoas": 3000,
+    "imagemURL": "foto24.png",
+    "telefone": "99999990",
+    "email": "luchoreyes@marcelo.com.br",
+    "lotes": [
+      {
+        "nome": "1º lote",
+        "preco": 1100,
+        "dataInicio": "2024-09-30T12:32:33.376",
+        "dataFim": "2024-09-30T12:32:33.376",
+        "quantidade": 2500
+      },
+      {
+        "nome": "2º lote",
+        "preco": 2200,
+        "dataInicio": "2024-10-05T12:32:33.376",
+        "dataFim": "2024-05-10T12:32:33.376",
+        "quantidade": 2700
+      }]
+,
+  "redesSociais": [
+    {
+      "nome": "X",
+      "url": "https://x.com/"
+    },
+    {
+      "nome": "Threads",
+      "url": "https://Threads.net/"
+    }
+
+]
+,
+    "palestrantesEventos": []
+}
+------------------------------------------------
+
+  {
+    "local": "San Pedro de Atacama",
+    "dataEvento": "2024-09-20T10:24:55.278",
+    "tema": "Angular 11.5",
+    "qtdPessoas": 2500,
+    "imagemURL": "foto25.png",
+    "telefone": "3281-9900",
+    "email": "rrivera@marcelo.com.br",
+    "lotes": [
+      {
+        "nome": "1º lote",
+        "preco": 900,
+        "dataInicio": "2024-09-20T12:32:33.376",
+        "dataFim": "2024-09-20T12:32:33.376",
+        "quantidade": 150
+      },
+      {
+
+        "nome": "2º lote",
+        "preco": 1100,
+        "dataInicio": "2024-09-22T12:32:33.376",
+        "dataFim": "2024-09-22T12:32:33.376",
+        "quantidade": 220
+      }
+    ],
+    "redesSociais": [
+      {
+        "nome": "X",
+        "url": "https://x.com/"
+      },
+      {
+        "nome": "Threads",
+        "url": "https://Threads.net/"
+      }],
+    "palestrantesEventos": []
+  },
+  {
+     "local": "Santiago",
+    "dataEvento": "2024-09-20T12:24:55.278",
+    "tema": "Net Core Entity",
+    "qtdPessoas": 350,
+    "imagemURL": "foto3.png",
+    "telefone": "99292-9439",
+    "email": "rrivera@marcelo.com.br",
+    "lotes": [],
+    "redesSociais": [],
+    "palestrantesEventos": []
+  }
+
+
+
+  // "profiles": {
+  //   "http": {
+  //     "commandName": "Project",
+  //     "dotnetRunMessages": true,
+  //     "launchBrowser": true,
+  //     "launchUrl": "swagger",
+  //     "applicationUrl": "http://localhost:5131",
+  //     "environmentVariables": {
+  //       "ASPNETCORE_ENVIRONMENT": "Development"
+  //     }
+  //   },
+  //   "https": {
+  //     "commandName": "Project",
+  //     "dotnetRunMessages": true,
+  //     "launchBrowser": true,
+  //     "launchUrl": "swagger",
+  //     "applicationUrl": "https://localhost:7181;http://localhost:5131",
+  //     "environmentVariables": {
+  //       "ASPNETCORE_ENVIRONMENT": "Development"
+  //     }
+  //   },
+  //   "IIS Express": {
+  //     "commandName": "IISExpress",
+  //     "launchBrowser": true,
+  //     "launchUrl": "swagger",
+  //     "environmentVariables": {
+  //       "ASPNETCORE_ENVIRONMENT": "Development"
+  //     }
+  //   }
+  // }

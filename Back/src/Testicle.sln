@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testiculo", "Testiculo\Testiculo.csproj", "{949C306A-A23A-4491-AB4E-C6EEFB99E607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testiculo.Application", "Testiculo.Application\Testiculo.Application.csproj", "{3B58AFEF-C699-4B50-AEE0-CA39A2CEA06C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testiculo.Domain", "Testiculo.Domain\Testiculo.Domain.csproj", "{464501E9-97EC-4E3C-BF8F-F738CB24722D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testiculo.Persistence", "Testiculo.Persistence\Testiculo.Persistence.csproj", "{76C18147-447A-4FB2-ABA6-531372A7CA70}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{949C306A-A23A-4491-AB4E-C6EEFB99E607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{949C306A-A23A-4491-AB4E-C6EEFB99E607}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{949C306A-A23A-4491-AB4E-C6EEFB99E607}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{949C306A-A23A-4491-AB4E-C6EEFB99E607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B58AFEF-C699-4B50-AEE0-CA39A2CEA06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B58AFEF-C699-4B50-AEE0-CA39A2CEA06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B58AFEF-C699-4B50-AEE0-CA39A2CEA06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B58AFEF-C699-4B50-AEE0-CA39A2CEA06C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{464501E9-97EC-4E3C-BF8F-F738CB24722D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{464501E9-97EC-4E3C-BF8F-F738CB24722D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{464501E9-97EC-4E3C-BF8F-F738CB24722D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{464501E9-97EC-4E3C-BF8F-F738CB24722D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76C18147-447A-4FB2-ABA6-531372A7CA70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76C18147-447A-4FB2-ABA6-531372A7CA70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76C18147-447A-4FB2-ABA6-531372A7CA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76C18147-447A-4FB2-ABA6-531372A7CA70}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
