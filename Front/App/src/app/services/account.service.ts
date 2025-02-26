@@ -43,6 +43,11 @@ export class AccountService {
     this.currentUserSource.next(user);
   }
 
+  public getCurrentUser(): User | null {
+    const userJson = localStorage.getItem('user');
+    return userJson ? JSON.parse(userJson) as User : null;
+  }
+
   public register(model: any): Observable<User>{
     return this.http.post<User>(this.baseUrl + 'register', model).pipe(
       take(1),

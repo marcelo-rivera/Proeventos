@@ -15,7 +15,7 @@ import { PerfilComponent } from './components/user/perfil/perfil.component';
 
 import { ContatosComponent } from './components/contatos/contatos.component';
 
-import { authGuard } from './guard/auth.guard';
+import { AuthenticationGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   { path: 'user', component: UserComponent,
@@ -34,9 +34,9 @@ const routes: Routes = [
       {path: 'lista', component: EventoListaComponent}
    ]
   },
-  {path: 'palestrantes', component: PalestrantesComponent, canActivate: [authGuard] },
-  {path: 'contatos', component: ContatosComponent, canActivate: [authGuard] },
-  {path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
+  {path: 'palestrantes', component: PalestrantesComponent, canActivate: [AuthenticationGuard] },
+  {path: 'contatos', component: ContatosComponent, canActivate: [AuthenticationGuard] },
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthenticationGuard] },
   {path: '', redirectTo: 'dashboard' , pathMatch: 'full'},
   {path: '**', redirectTo: 'dashboard' , pathMatch: 'full'}
 ];
