@@ -41,6 +41,7 @@ import { AccountService } from './services/account.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { HomeComponent } from './components/home/home.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -57,6 +58,7 @@ defineLocale('pt-br', ptBrLocale);
       TituloComponent,
       EventoDetalheComponent,
       EventoListaComponent,
+      HomeComponent,
       UserComponent,
       LoginComponent,
       RegistrationComponent

@@ -38,9 +38,14 @@ export class AccountService {
     //this.currentUserSource.complete();
   }
 
-  public setCurrentUser(user: User): void {
-    localStorage.setItem('user', JSON.stringify(user));
-    this.currentUserSource.next(user);
+  public setCurrentUser(user: User | null): void {
+    try{
+      localStorage.setItem('user', JSON.stringify(user));
+      this.currentUserSource.next(user);
+    } catch (e) {
+      console.log('Erro ao tentar acessar o localStorage! account service');
+      this.currentUserSource.next(null);
+    }
   }
 
   public getCurrentUser(): User | null {

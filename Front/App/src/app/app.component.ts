@@ -20,12 +20,20 @@ export class AppComponent {
   setCurrentUser(): void {
     let user: User | null;
 
-    if(this.accountService.getCurrentUser() !== null)
-      user = this.accountService.getCurrentUser();
-    else
-      user = null;
+    try {
+      if(localStorage.getItem('user') !== null)
+        user = this.accountService.getCurrentUser();
+      else
+        user = null;
 
-    if (user)
-      this.accountService.setCurrentUser(user);
+        if (user)
+          this.accountService.setCurrentUser(user);
+    }
+    catch (e) {
+      console.log('Erro ao tentar acessar o localStorage! app component');
+      this.accountService.setCurrentUser(null);
+    }
+
+
   }
 }
