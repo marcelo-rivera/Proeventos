@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@app/environment';
 import { User } from '@app/models/Identity/User';
+import { UserUpdate } from '@app/models/Identity/UserUpdate';
 import { map, Observable, ReplaySubject, take } from 'rxjs';
 
 @Injectable(//{
@@ -43,14 +44,22 @@ export class AccountService {
       localStorage.setItem('user', JSON.stringify(user));
       this.currentUserSource.next(user);
     } catch (e) {
-      console.log('Erro ao tentar acessar o localStorage! account service');
+      //console.log('Erro ao tentar acessar o localStorage! account service');
       this.currentUserSource.next(null);
     }
   }
 
-  public getCurrentUser(): User | null {
-    const userJson = localStorage.getItem('user');
-    return userJson ? JSON.parse(userJson) as User : null;
+  getUser(): Observable<UserUpdate> {
+    return this.http.get<UserUpdate>(this.baseUrl + 'getUser').pipe(take(1));
+  }
+
+  updateUser(model: UserUpdate): Observable<void> {
+    return this.http.put<UserUpdate>(this.baseUrl + 'updateUser', model).pipe(
+      take(1),
+      map((user: UserUpdate) => {
+        this.setCurrentUser(user);
+      })
+    )
   }
 
   public register(model: any): Observable<User>{

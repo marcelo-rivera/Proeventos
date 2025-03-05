@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
         return true;
     }
     catch (e) {
-      console.log('Erro ao tentar acessar o localStorage! auth guard');
+      //console.log('Erro ao tentar acessar o localStorage! auth guard');
       return true;
     }
 
