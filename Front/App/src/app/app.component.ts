@@ -19,11 +19,14 @@ export class AppComponent {
 
   setCurrentUser(): void {
     let user: User | null;
-
-    if (localStorage.getItem('user'))
-      user = JSON.parse(localStorage.getItem('user') ?? '{}');
-    else
-      user = null
+    try{
+      if (localStorage.getItem('user'))
+        user = JSON.parse(localStorage.getItem('user') ?? '{}');
+      else
+        user = null
+    } catch (e) {
+      user = null;
+    }
 
     if (user)
       this.accountService.setCurrentUser(user);

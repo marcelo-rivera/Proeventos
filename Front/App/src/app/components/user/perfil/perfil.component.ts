@@ -38,13 +38,13 @@ export class PerfilComponent implements OnInit {
     this.spinner.show();
     this.accountService.getUser().subscribe(
       (userRetorno: UserUpdate) => {
-        console.log(userRetorno);
+        //console.log(userRetorno);
         this.userUpdate = userRetorno;
         this.form.patchValue(this.userUpdate);
         this.toastr.success('Usuário carregado com sucesso!', 'Sucesso');
       },
       (error) => {
-        console.error(error);
+        //console.error(error);
         //this.toastr.error('Erro ao tentar carregar usuário.', 'Erro');
         this.router.navigate(['/dashboard']);
       }
@@ -59,6 +59,7 @@ export class PerfilComponent implements OnInit {
     };
 
     this.form = this.fb.group({
+    userName: [''],
     titulo: ['',Validators.required],
     primeiroNome: ['',[Validators.required,Validators.minLength(8),Validators.maxLength(50)]],
     ultimoNome: ['',[Validators.required,Validators.minLength(8),Validators.maxLength(50)]],
@@ -66,15 +67,36 @@ export class PerfilComponent implements OnInit {
     phoneNumber: ['',[Validators.required,Validators.minLength(11),Validators.maxLength(12)]],
     descricao: ['',[Validators.required,Validators.maxLength(30)]],
     funcao: ['',[Validators.required]],
-    password: ['',[Validators.required,Validators.minLength(8)]],
-    confirmePassword: ['',[Validators.required]]
+    password: ['',Validators.minLength(6)],
+    confirmePassword: ['']
     }, formOptions);
   }
+
   onSubmit(): void {
     // Vai parar aqui se o form estiver inválido
     if (this.form.invalid) {
       return;
+    }else{
+      this.atualizarUsuario();
     }
+  }
+
+  public atualizarUsuario(): void {
+    this.spinner.show();
+    this.userUpdate = this.form.value;
+    this.userUpdate.token = "A";//"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMCIsInVuaXF1ZV9uYW1lIjoidHJ1amlsbG8iLCJuYmYiOjE3NDEzNzE1OTksImV4cCI6MTc0MTQ1Nzk5OSwiaWF0IjoxNzQxMzcxNTk5fQ.y0srYuzNJFkM8tJqozDtpB6wHMZZCP1gR6zIQsYAb_b-BVByLrgp8HlwgDRzWvym-WFngfd_ckU-LvkGehVPYw";
+    //console.log(this.userUpdate);
+    this.accountService.updateUser(this.userUpdate).subscribe(
+      () => {
+        this.toastr.success('Usuário atualizado com sucesso!', 'Sucesso');
+        this.router.navigate(['/dashboard']);
+      },
+      (error) => {
+        console.error(error);
+        this.toastr.error('Erro ao tentar atualizar usuário.', 'Erro');
+      }
+    )
+    .add(() => this.spinner.hide());
   }
 
   public resetForm(event: any): void {

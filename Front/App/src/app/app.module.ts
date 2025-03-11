@@ -90,7 +90,8 @@ defineLocale('pt-br', ptBrLocale);
     LoteService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],   // injeção de dependencia, poderá ser usado em qquer modulo
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  bootstrap: [AppComponent]
+  //,
+  //schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
