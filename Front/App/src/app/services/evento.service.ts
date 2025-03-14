@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Evento } from '../models/Evento';
 import { take } from 'rxjs/operators';
 import { environment } from '@environments/environment';
+import { PaginatedResult } from '@app/models/Pagination';
 
 @Injectable(
 //  {  providedIn: 'root'}   injeçao de dependencia (outra forma)
@@ -18,7 +19,15 @@ export class EventoService { [key: string]: any  // [key: string]: any para pode
 
   }
 
-  public getEventos(): Observable <Evento[]> {
+  public getEventos(page: number, itemsPerPage: number): Observable <PaginatedResult<Evento>> {
+    const paginatedResult: PaginatedResult<Evento[]> = new PaginatedResult<Evento[]>();
+
+    let params = new HttpParams;
+
+    if (page !== null && itemsPerPage !== null)
+      params = params.append('pageNumber', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+
     return this.http
       .get<Evento[]>(this.baseURL)
       .pipe(take(1));

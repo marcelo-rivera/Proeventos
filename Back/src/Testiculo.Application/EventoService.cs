@@ -9,6 +9,7 @@ using Testiculo.Application.Contratos;
 using Testiculo.Application.Dtos;
 using Testiculo.Domain;
 using Testiculo.Persistence.Contratos;
+using Testiculo.Persistence.Models;
 
 namespace Testiculo.Application
 {
@@ -95,14 +96,19 @@ namespace Testiculo.Application
             }
         }
 
-        public async Task<EventoDto[]> GetallEventosAsync(int userId, bool includePalestrantes = false)
+        public async Task<PageList<EventoDto>> GetallEventosAsync(int userId, PageParams pageParams, bool includePalestrantes = false)
         {
             try
             {
-                var eventos = await _eventoPersist.GetallEventosAsync(userId, includePalestrantes);
+                var eventos = await _eventoPersist.GetallEventosAsync(userId, pageParams, includePalestrantes);
                 if (eventos == null) return null;
 
-                var resultado = _mapper.Map<EventoDto[]>(eventos);
+                var resultado = _mapper.Map<PageList<EventoDto>>(eventos);
+
+                resultado.TotalCount = eventos.TotalCount;
+                resultado.PageSize = eventos.PageSize;
+                resultado.CurrentPage = eventos.CurrentPage;
+                resultado.TotalPages = eventos.TotalPages;
 
                 return resultado;
 
@@ -114,22 +120,22 @@ namespace Testiculo.Application
             }
         }
 
-        public async Task<EventoDto[]> GetallEventosByTemaAsync(int userId, string tema, bool includePalestrantes = false)
-        {
-            try
-            {
-                var eventos = await _eventoPersist.GetallEventosByTemaAsync(userId, tema,includePalestrantes);
-                if (eventos == null) return null;
+        // public async Task<EventoDto[]> GetallEventosByTemaAsync(int userId, string tema, bool includePalestrantes = false)
+        // {
+        //     try
+        //     {
+        //         var eventos = await _eventoPersist.GetallEventosByTemaAsync(userId, tema,includePalestrantes);
+        //         if (eventos == null) return null;
 
-                var resultado = _mapper.Map<EventoDto[]>(eventos);
+        //         var resultado = _mapper.Map<EventoDto[]>(eventos);
 
-                return resultado;
-            }                                    
-            catch (Exception ex)                                                                                                                        
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //         return resultado;
+        //     }                                    
+        //     catch (Exception ex)                                                                                                                        
+        //     {
+        //         throw new Exception(ex.Message);
+        //     }
+        // }
 
         public async Task<EventoDto> GetEventosByIdAsync(int userId, int eventoId, bool includePalestrantes = false)
         {

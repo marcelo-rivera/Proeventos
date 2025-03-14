@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Testiculo.Domain;
 using Testiculo.Persistence.Contratos;
 using Testiculo.Persistence.Contexto;
+using Testiculo.Persistence.Models;
 
 namespace Testiculo.Persistence
 {
@@ -16,7 +17,7 @@ namespace Testiculo.Persistence
             //Ex.: query = query.AsNoTracking().OrderBy(e => e.Id);
 
         }
-        public async Task<Evento[]> GetallEventosAsync(int userId, bool includePalestrantes = false)
+        public async Task<PageList<Evento>> GetallEventosAsync(int userId, PageParams pageParams, bool includePalestrantes = false)
         {
             IQueryable<Evento> query = _context.Eventos
                 .Include(e => e.Lotes)
@@ -30,32 +31,33 @@ namespace Testiculo.Persistence
             }
 
             query = query.AsNoTracking()
-                        .Where(e => e.UserId == userId)
+                        .Where(e => e.Tema.ToLower().Contains(pageParams.Term.ToLower()) &&
+                                    e.UserId == userId)
                         .OrderBy(e => e.Id);
 
-            return await query.ToArrayAsync();
+            return await PageList<Evento>.CreateAsync(query, pageParams.PageNumber, pageParams.PageSize);
         }
 
-        public async Task<Evento[]> GetallEventosByTemaAsync(int userId, string tema, bool includePalestrantes=false)
-        {
-            IQueryable<Evento> query = _context.Eventos
-                .Include(e => e.Lotes)
-                .Include(e => e.RedesSociais);
+        // public async Task<PageList<Evento>> GetallEventosByTemaAsync(int userId, PageParams pageParams, string tema, bool includePalestrantes=false)
+        // {
+        //     IQueryable<Evento> query = _context.Eventos
+        //         .Include(e => e.Lotes)
+        //         .Include(e => e.RedesSociais);
 
-            if(includePalestrantes)
-            {
-                query = query
-                    .Include(e => e.PalestrantesEventos)
-                    .ThenInclude(pe => pe.Palestrante);
+        //     if(includePalestrantes)
+        //     {
+        //         query = query
+        //             .Include(e => e.PalestrantesEventos)
+        //             .ThenInclude(pe => pe.Palestrante);
                     
-            }
+        //     }
 
-            query = query.AsNoTracking().OrderBy(e => e.Id)
-                .Where(e => e.Tema.ToLower().Contains(tema.ToLower())
-                        && e.UserId == userId);
+        //     query = query.AsNoTracking().OrderBy(e => e.Id)
+        //         .Where(e => e.Tema.ToLower().Contains(tema.ToLower())
+        //                 && e.UserId == userId);
 
-            return await query.ToArrayAsync();
-        }
+        //     return await query.ToArrayAsync();
+        // }
 
         public async Task<Evento> GetEventosByIdAsync(int userId, int EventoId, bool includePalestrantes=false)
         {

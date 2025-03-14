@@ -5,6 +5,8 @@ using testiculo.Extensions;
 using Microsoft.AspNetCore.Authorization;
 
 using System.Security.Claims;
+using Testiculo.Persistence.Models;
+using Testiculo.Extensions;
 
 
 namespace Testiculo.Controllers
@@ -53,14 +55,16 @@ namespace Testiculo.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery]PageParams pageParams)
         {
             //return _evento; 
             //return _context.Eventos;
             try
             {
-                var eventos = await _eventoService.GetallEventosAsync(User.GetUserId(), true);
+                var eventos = await _eventoService.GetallEventosAsync(User.GetUserId(), pageParams, true);
                 if (eventos == null) NoContent();
+
+                Response.AddPagination(eventos.CurrentPage, eventos.PageSize, eventos.TotalCount, eventos.TotalPages);
 
                 return Ok(eventos);
             }
@@ -93,28 +97,28 @@ namespace Testiculo.Controllers
 
             }            
         }
-        [HttpGet("{tema}/tema")]
+        // [HttpGet("{tema}/tema")]
 
-        //public async Evento GetByTema(int id)
-        public async Task<IActionResult> GetByTema(string tema)
-        {
-            //return _evento.Where(evento => evento.EventoId == id);
-            //return _context.Eventos.Where(evento => evento.Id == id);
-            //return _context.Eventos.FirstOrDefault(evento => evento.Id == id);
-            try
-            {
-                var evento = await _eventoService.GetallEventosByTemaAsync(User.GetUserId(), tema, true);
-                if (evento == null) NoContent();
+        // //public async Evento GetByTema(int id)
+        // public async Task<IActionResult> GetByTema(string tema)
+        // {
+        //     //return _evento.Where(evento => evento.EventoId == id);
+        //     //return _context.Eventos.Where(evento => evento.Id == id);
+        //     //return _context.Eventos.FirstOrDefault(evento => evento.Id == id);
+        //     try
+        //     {
+        //         var evento = await _eventoService.GetallEventosByTemaAsync(User.GetUserId(), tema, true);
+        //         if (evento == null) NoContent();
 
-                return Ok(evento);
-            }
-            catch(Exception ex)
-            {
-                return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar recuperar eventos. Erro {ex.Message}");
+        //         return Ok(evento);
+        //     }
+        //     catch(Exception ex)
+        //     {
+        //         return this.StatusCode(StatusCodes.Status500InternalServerError,
+        //             $"Erro ao tentar recuperar eventos. Erro {ex.Message}");
 
-            }            
-        }
+        //     }            
+        // }
 
         [HttpPost("upload-image/{eventoId}")]
         public async Task<IActionResult> UploadIimage(int eventoId)

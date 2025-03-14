@@ -1,4 +1,5 @@
 using Testiculo.Application.Dtos;
+using Testiculo.Persistence.Models;
 
 namespace Testiculo.Application.Contratos
 {
@@ -8,8 +9,9 @@ namespace Testiculo.Application.Contratos
         Task<EventoDto> UpdateEvento(int userId, int eventoId,EventoDto model);    
         Task<bool> DeleteEvento(int userId, int eventoId);   
 
-        Task<EventoDto[]> GetallEventosAsync(int userId, bool includePalestrantes = false);
-        Task<EventoDto[]> GetallEventosByTemaAsync(int userId, string tema, bool includePalestrantes = false);
+        Task<PageList<EventoDto>> GetallEventosAsync(int userId, PageParams pageParams, bool includePalestrantes = false);
+        
+        //Task<EventoDto[]> GetallEventosByTemaAsync(int userId, string tema, bool includePalestrantes = false);
         Task<EventoDto> GetEventosByIdAsync(int userId, int eventoId, bool includePalestrantes = false);         
     }
 }

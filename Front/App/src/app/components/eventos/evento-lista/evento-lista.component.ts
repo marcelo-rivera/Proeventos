@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 import { environment } from '@app/environment';
+import { Pagination } from '@app/models/Pagination';
 
 @Component({
   selector: 'app-evento-lista',
@@ -21,6 +22,7 @@ export class EventoListaComponent {
   public eventos: Evento[] = [] ;
   public eventosFiltrados: Evento[] = [] ;
   public eventoId: number = 0;
+  public pagination = {} as Pagination;
 
   public widthImg: number = 62;
   public marginImg: number = 2;
@@ -53,7 +55,7 @@ export class EventoListaComponent {
   ) {}
 
   public ngOnInit(): void {
-    this.spinner.show();
+    this.pagination = {currentPage: 1, itemsPerPage: 1, totalItems: 1 } as Pagination
     this.carregarEventos();
   }
 
@@ -70,6 +72,7 @@ export class EventoListaComponent {
   }
 
   public carregarEventos (): void {
+    this.spinner.show();
 
     this.eventoService.getEventos().subscribe({
       next: (_eventos: Evento[]) => {
@@ -91,6 +94,10 @@ export class EventoListaComponent {
     event.stopPropagation();
     this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  public pageChanged($event): void {
+    this.carregarEventos
   }
 
   confirm(): void {
