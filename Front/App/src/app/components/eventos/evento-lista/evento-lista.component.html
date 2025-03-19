@@ -6,7 +6,7 @@
           <div class="input-group-text">Filtro:</div>
         </div>
         <input type="text" class="form-control" placeholder="Filtrar por Tema e Local"
-          [(ngModel)]="filtrolista">
+          (input)="filtrarEventos($event.target)">
       </div>
     </div>
     <div>
@@ -39,7 +39,7 @@
     </tr>
   </thead>
   <tbody >
-    <tr *ngFor="let evento of eventosFiltrados" (click)="detalheEvento(evento.id)" style="cursor: pointer;">
+    <tr *ngFor="let evento of eventos" (click)="detalheEvento(evento.id)" style="cursor: pointer;">
       <td class="d-none d-md-table-cell">
         <!--<img *ngIf="showImg"-->
         <img [collapse] = "!showImg" [isAnimated]="true"
