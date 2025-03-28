@@ -59,7 +59,7 @@ namespace Testiculo.Controllers
         {
             try
             {
-                var palestrante = await _palestranteService.GetPalestrantesByUserIdAsync(User.GetUserId(), true);
+                var palestrante = await _palestranteService.GetPalestranteByUserIdAsync(User.GetUserId(), true);
                 if (palestrante == null) NoContent();
 
                 return Ok(palestrante);
@@ -77,7 +77,7 @@ namespace Testiculo.Controllers
         {
             try
             {
-                var palestrante = await _palestranteService.GetPalestrantesByUserIdAsync(User.GetUserId(), false);
+                var palestrante = await _palestranteService.GetPalestranteByUserIdAsync(User.GetUserId(), false);
                 
                 if (palestrante == null)
                     palestrante = await _palestranteService.AddPalestrantes(User.GetUserId(), model);

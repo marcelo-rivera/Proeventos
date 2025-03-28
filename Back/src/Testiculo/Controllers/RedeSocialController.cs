@@ -54,7 +54,7 @@ namespace Testiculo.Controllers
         {
             try
             {
-                var palestrante = await _palestranteService.GetPalestrantesByUserIdAsync(User.GetUserId());
+                var palestrante = await _palestranteService.GetPalestranteByUserIdAsync(User.GetUserId());
                 if (palestrante == null)
                     return Unauthorized("Acesso não autorizado.");
 
@@ -97,7 +97,7 @@ namespace Testiculo.Controllers
         {
             try
             {
-                var palestrante = await _palestranteService.GetPalestrantesByUserIdAsync(User.GetUserId());
+                var palestrante = await _palestranteService.GetPalestranteByUserIdAsync(User.GetUserId());
                 if (palestrante == null)
                     return Unauthorized("Acesso não autorizado.");
                     
@@ -140,7 +140,7 @@ namespace Testiculo.Controllers
         {
             try
             {
-                var palestrante = await _palestranteService.GetPalestrantesByUserIdAsync(User.GetUserId());
+                var palestrante = await _palestranteService.GetPalestranteByUserIdAsync(User.GetUserId());
                 if (palestrante == null)
                     return Unauthorized("Acesso não autorizado.");
                     
