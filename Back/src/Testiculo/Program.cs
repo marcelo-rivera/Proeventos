@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
+using Testiculo.Helpers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -77,6 +78,7 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IPalestranteService, PalestranteService>();
 builder.Services.AddScoped<IRedeSocialService, RedeSocialService>();
+builder.Services.AddScoped<IUtil, Util>();
 
 builder.Services.AddScoped<IGeralPersist, GeralPersist>();
 builder.Services.AddScoped<IEventoPersist, EventoPersist>();

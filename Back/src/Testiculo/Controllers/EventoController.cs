@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Testiculo.Persistence.Models;
 using Testiculo.Extensions;
+using Testiculo.Helpers;
 
 
 namespace Testiculo.Controllers
@@ -39,18 +40,19 @@ namespace Testiculo.Controllers
         
         //private readonly TesticuloContext _context;
         private readonly IEventoService _eventoService;
-        private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IUtil _util;
 
         private readonly IAccountService _accountService;
+        private readonly string _destino = "Resources/Images";
 
         //public EventoController(TesticuloContext context)
         public EventoController(IEventoService eventoService, 
-                                IWebHostEnvironment hostEnvironment,
+                                IUtil util,
                                 IAccountService accountService)
         {
         //    _context = context;
             _eventoService = eventoService;
-            _hostEnvironment = hostEnvironment;
+            _util = util;
             _accountService = accountService;
         }
 
@@ -131,8 +133,8 @@ namespace Testiculo.Controllers
                 var file = Request.Form.Files[0];
                 if(file.Length > 0)
                 {
-                    DeleteImage(evento.ImagemURL);
-                    evento.ImagemURL = await SaveImage(file);
+                    _util.DeleteImage(evento.ImagemURL, _destino);
+                    evento.ImagemURL = await _util.SaveImage(file, _destino);
                 }
                 var EventoRetorno = await _eventoService.UpdateEvento(User.GetUserId(), eventoId, evento);
 
@@ -141,7 +143,7 @@ namespace Testiculo.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                    $"Erro ao tentar adicionar eventos. Erro: {ex.Message}");
+                    $"Erro ao tentar adicionar imagem do evento. Erro: {ex.Message}");
             }
         }
 
@@ -189,7 +191,7 @@ namespace Testiculo.Controllers
 
                 if (await _eventoService.DeleteEvento(User.GetUserId(), id))
                 {
-                    DeleteImage(evento.ImagemURL);
+                    _util.DeleteImage(evento.ImagemURL, _destino);
                     return Ok(new { message = "Excluído"});
                 }
                 else
@@ -205,32 +207,5 @@ namespace Testiculo.Controllers
             }
         }
 
-        [NonAction]
-        public async Task<string> SaveImage(IFormFile imageFile)
-        {
-            string imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName)
-                                            .Take(10)
-                                            .ToArray()
-                                            ).Replace(' ','-');
-
-            imageName = $"{imageName}{DateTime.UtcNow.ToString("yymmssfff")}{Path.GetExtension(imageFile.FileName)}";
-
-            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/images", imageName);
-
-            using (var fileStream = new FileStream(imagePath, FileMode.Create))
-            {
-                await imageFile.CopyToAsync(fileStream);
-            }
-            
-            return imageName;
-        }
-
-        [NonAction]
-        public void DeleteImage(string imageName)
-        {
-            var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, @"Resources/images", imageName); 
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
-        }
     }
 }
