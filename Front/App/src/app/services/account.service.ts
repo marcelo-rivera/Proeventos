@@ -76,4 +76,14 @@ export class AccountService {
     );
   }
 
+  postUpload(file: File): Observable<UserUpdate> {
+    const fileToUpload = file as File;
+    const formData = new FormData();
+    formData.append('file',fileToUpload)
+
+    return this.http
+      .post<UserUpdate>(`${this.baseUrl}upload-image`, formData)
+      .pipe(take(1));
+  }
+
 }

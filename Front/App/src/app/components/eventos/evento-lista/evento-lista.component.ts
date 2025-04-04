@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Evento } from '@app/models/Evento';
 import { EventoService } from '@app/services/evento.service';
@@ -14,7 +14,7 @@ import { debounceTime, Subject } from 'rxjs';
   templateUrl: './evento-lista.component.html',
   styleUrl: './evento-lista.component.scss'
 })
-export class EventoListaComponent {
+export class EventoListaComponent implements OnInit{
 
 
   modalRef?: BsModalRef;
