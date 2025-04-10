@@ -43,7 +43,7 @@ namespace Testiculo.Controllers
         private readonly IUtil _util;
 
         private readonly IAccountService _accountService;
-        private readonly string _destino = "Resources/Images";
+        private readonly string _destino = "Images";
 
         //public EventoController(TesticuloContext context)
         public EventoController(IEventoService eventoService, 
@@ -133,8 +133,11 @@ namespace Testiculo.Controllers
                 var file = Request.Form.Files[0];
                 if(file.Length > 0)
                 {
+                    
                     _util.DeleteImage(evento.ImagemURL, _destino);
                     evento.ImagemURL = await _util.SaveImage(file, _destino);
+                    
+
                 }
                 var EventoRetorno = await _eventoService.UpdateEvento(User.GetUserId(), eventoId, evento);
 
